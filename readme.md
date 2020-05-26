@@ -1,52 +1,31 @@
-![phaser3-parceljs-template](https://user-images.githubusercontent.com/2236153/71606463-37a0da80-2b2e-11ea-9b5f-5d26ccc84f91.png)
-
-# Phaser3 + Parcel Template
-> For people who want to spend time making games instead of configuring build tools.
+# Phaser RPG
+> A first go using templates and tutorials
 
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-## Prerequisites
+## Tools, Templates, and Tuts
+
+- [Phaser](https://phaser.io/)
+- [Parcel](https://parceljs.org/)
+- [Phaser + Parcel Project Boilerplate](https://github.com/ourcade/phaser3-parcel-template)
+- [GameDev Academy - How to Create a Turn-Based RPG](https://gamedevacademy.org/how-to-create-a-turn-based-rpg-game-in-phaser-3-part-1/)
+
+## Prereqs
 
 You'll need [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/), and [Parcel](https://parceljs.org/) installed.
-
-It is highly recommended to use [Node Version Manager](https://github.com/nvm-sh/nvm) (nvm) to install Node.js and npm.
-
-For Windows users there is [Node Version Manager for Windows](https://github.com/coreybutler/nvm-windows).
-
-Install Node.js and `npm` with `nvm`:
-
-```bash
-nvm install node
-
-nvm use node
-```
-
-Replace 'node' with 'latest' for `nvm-windows`.
-
-Then install Parcel:
-
-```bash
-npm install -g parcel-bundler
-```
 
 ## Getting Started
 
 Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/ourcade/phaser3-parcel-template.git
-```
-
-This will create a folder named `phaser3-parcel-template`. You can specify a different folder name like this:
-
-```bash
-git clone https://github.com/ourcade/phaser3-parcel-template.git my-folder-name
+git clone https://github.com/joesgithub/phaser-rpg.git #my-folder-name
 ```
 
 Go into your new project folder and install dependencies:
 
 ```bash
-cd phaser3-parcel-template # or 'my-folder-name'
+cd phaser-rpg # or 'my-folder-name'
 npm install
 ```
 
@@ -62,30 +41,24 @@ To create a production build:
 npm run build
 ```
 
-Production files will be placed in the `dist` folder. Then upload those files to a web server. 🎉
+Production files will be placed in the `docs` folder. Then upload those files to a web server. 🎉
 
 ## Project Structure
 
 ```
     .
     ├── dist
+    ├── docs
     ├── node_modules
     ├── public
     ├── src
     │   ├── scenes
-    │   │   ├── HelloWorldScene.js
+    │   │   ├── Scene.js
     │   ├── index.html
     │   ├── main.js
+    ├── .babelrc
     ├── package.json
 ```
-
-The contents of this template is the basic [Phaser3 getting started example](http://phaser.io/tutorials/getting-started-phaser3/part5).
-
-This template assumes you will want to organize your code into multiple files and use modern JavaScript (or TypeScript).
-
-JavaScript files are intended for the `src` folder. `main.js` is the entry point referenced by `index.html`.
-
-Other than that there is no opinion on how you should structure your project. There is a `scenes` folder in `src` where the `HelloWorldScene.js` lives but you can do whatever you want.
 
 ## Static Assets
 
@@ -107,7 +80,7 @@ They can then be loaded by Phaser with `this.image.load('my-image', 'images/my-i
 
 ## Class Properties Support
 
-If you want to use the modern ES6 class properties feature then you'll need to add a `.babelrc` file at the project root with the `@babel/plugin-proposal-class-properties` plugin.
+Modern ES6 class properties are included with the `.babelrc` file at the project root with the `@babel/plugin-proposal-class-properties` plugin.
 
 ```
 {
@@ -120,7 +93,7 @@ If you want to use the modern ES6 class properties feature then you'll need to a
 }
 ```
 
-Parcel should automatically install the necessary dependencies.
+Parcel should automatically install the necessary dependencies on first start or build.
 
 If you run into an error about mismatched major versions then go into `package.json` to see what the major versions for `@babel/core` and `@babel/plugin-proposal-class-properties` are.
 
@@ -136,7 +109,7 @@ It does not aim to be opinionated.
 
 ## TypeScript
 
-Check out the [phaser3-typescript-parcel-template](https://github.com/ourcade/phaser3-typescript-parcel-template) for a ready-to-use version of this template in TypeScript!
+Check out the [phaser3-typescript-parcel-template](https://github.com/ourcade/phaser3-typescript-parcel-template) for a ready-to-use version of the [Phaser + Parcel template](https://github.com/ourcade/phaser3-parcel-template) in TypeScript! It can be extended to this project.
 
 ## Flow
 
@@ -160,10 +133,10 @@ Change 8000 to whatever you want.
 
 ## Other Notes
 
-[parcel-plugin-clean-easy](https://github.com/lifuzhao100/parcel-plugin-clean-easy) is used to ensure only the latest files are in the `dist` folder. You can modify this behavior by changing `parcelCleanPaths` in `package.json`.
+[parcel-plugin-clean-easy](https://github.com/lifuzhao100/parcel-plugin-clean-easy) is used to ensure only the latest files are in the `docs` folder. You can modify this behavior by changing `parcelCleanPaths` in `package.json`.
 
 [parcel-plugin-static-files](https://github.com/elwin013/parcel-plugin-static-files-copy#readme) is used to copy static files from `public` into the output directory and serve it. You can add additional paths by modifying `staticFiles` in `package.json`.
 
 ## License
 
-[MIT License](https://github.com/ourcade/phaser3-parcel-template/blob/master/LICENSE)
+[MIT License](https://github.com/joesgithub/phaser-rpg/blob/master/LICENSE)

@@ -1,19 +1,19 @@
 {
-	"name": "phaser3-parcel-template",
-	"version": "1.0.0",
-	"description": "A template project for Phaser3 using Parceljs",
+	"name": "phaser-rpg",
+	"version": "0.1.0",
+	"description": "A Phaser3 RPG game using Parceljs",
 	"scripts": {
 		"start": "parcel src/index.html -p 8000",
-		"build": "parcel build src/index.html --out-dir dist",
+		"build": "parcel build src/index.html --out-dir docs",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "supertommy",
+	"author": "joesgithub",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ourcade/phaser3-parcel-template.git"
+		"url": "https://github.com/joesgithub/phaser-rpg.git"
 	},
-	"homepage": "https://github.com/ourcade/phaser3-parcel-template",
+	"homepage": "https://github.com/joesgithub/phaser-rpg",
 	"devDependencies": {
 		"eslint": "^6.8.0",
 		"minimist": ">=1.2.2",
@@ -24,7 +24,7 @@
 		"phaser": "^3.23.0"
 	},
 	"parcelCleanPaths": [
-		"dist"
+		"docs"
 	],
 	"staticFiles": {
 		"staticPath": "public",
