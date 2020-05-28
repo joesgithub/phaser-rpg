@@ -26,7 +26,6 @@ export default class BattleScene extends Phaser.Scene {
     }
 
     receivePlayerSelection = (action, target) => {
-    	console.log('action', action);
         if(action === 'attack') {            
             this.units[this.index].attack(this.enemies[target]);              
         }
