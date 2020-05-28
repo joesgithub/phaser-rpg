@@ -1,0 +1,78 @@
+import Phaser from 'phaser';
+import PlayerCharacter from '../ui/PlayerCharacter';
+import Enemy from '../ui/Enemy';
+
+export default class BattleScene extends Phaser.Scene {
+	constructor() {
+		super('battle');
+        // from Phaser.Scene:
+        // this.scene
+        // this.cameras
+        // this.events
+        // this.time
+
+        this.heroes;
+        this.enemies;
+        this.units;
+        this.index;
+	}
+
+	preload() {
+    }
+
+    create() {
+    	this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
+
+    	// heroes
+    	const warrior = new PlayerCharacter(this, 250, 50, 'player', 1, 'Warrior', 100, 20);
+    	this.add.existing(warrior);
+
+        const mage = new PlayerCharacter(this, 250, 100, 'player', 4, 'Mage', 80, 8);
+        this.add.existing(mage);            
+        
+        // enemies
+        const dragonBlue = new Enemy(this, 50, 50, 'dragonblue', null, 'Dragon', 50, 3);
+        this.add.existing(dragonBlue);
+        
+        const dragonOrange = new Enemy(this, 50, 100, 'dragonorrange', null,'Dragon2', 50, 3);
+        this.add.existing(dragonOrange);
+
+        this.heroes = [ warrior, mage ];
+        this.enemies = [ dragonBlue, dragonOrange ];
+        this.units = [ ...this.heroes, ...this.enemies ];
+
+    	this.scene.launch('ui');
+
+    	this.index = -1;
+    }
+
+    nextTurn = () => {
+        this.index++;
+
+        // if there are no more units, we start again from the first one
+        if(this.index >= this.units.length) {
+            this.index = 0;
+        }
+
+        if(this.units[this.index]) {
+            // if its player hero
+            if(this.units[this.index] instanceof PlayerCharacter) {                
+                this.events.emit('PlayerSelect', this.index);
+            } else { // else if its enemy unit
+                // pick random hero
+                var r = Math.floor(Math.random() * this.heroes.length);
+                // call the enemy's attack function 
+                this.units[this.index].attack(this.heroes[r]);  
+                // add timer for the next turn, so will have smooth gameplay
+                this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+            }
+        }
+    }
+
+    receivePlayerSelection = (action, target) => {
+        if(action == 'attack') {            
+            this.units[this.index].attack(this.enemies[target]);              
+        }
+        this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });        
+    }
+}

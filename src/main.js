@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 
 import BootScene from './scenes/BootScene';
 import WorldScene from './scenes/WorldScene';
+import BattleScene from './scenes/BattleScene';
+import UIScene from './scenes/UIScene';
 
 const config = {
 	type: Phaser.AUTO,
@@ -22,7 +24,9 @@ const config = {
 	},
 	scene: [
 		BootScene,
-		WorldScene
+		WorldScene,
+		BattleScene,
+		UIScene
 	]
 };
 
