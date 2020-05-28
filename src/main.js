@@ -13,21 +13,21 @@ const config = {
 	zoom: 2, // scale
 	pixelArt: true, // no blur on scale
 	render: {
-		roundPixels: true
+		roundPixels: true,
 	},
 	physics: {
 		default: 'arcade',
 		arcade: {
 			gravity: { y: 0 },
-			debug: true
+			// debug: true,
 		},
 	},
 	scene: [
 		BootScene,
 		WorldScene,
 		BattleScene,
-		UIScene
-	]
+		UIScene,
+	],
 };
 
 export default new Phaser.Game(config);

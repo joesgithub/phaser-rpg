@@ -42,12 +42,20 @@ export default class UIScene extends Phaser.Scene {
         // create menus
         // can initialize with items like actionsMenu
         this.heroesMenu = new Menu(this, 195, 153);
-        this.actionsMenu = new Menu(this, 100, 153, ['Attack']);
+        this.actionsMenu = new Menu(this, 100, 153, ['Attack', 'Run']);
         this.enemiesMenu = new Menu(this, 8, 153);
 
         this.battleScene = this.scene.get('battle');
 
-        this.actionsMenu.confirm = () => this.events.emit('SelectEnemies');
+        this.actionsMenu.confirm = () => {
+        	const selection = this.actionsMenu.menuItems[this.actionsMenu.menuItemIndex].text;
+        	if (selection === 'Attack') {
+        		this.events.emit('SelectEnemies');
+        	}
+        	if (selection === 'Run') {
+        		this.events.emit('Run');
+        	}
+        }
         this.enemiesMenu.confirm = () => this.events.emit('Enemy', this.enemiesMenu.menuItemIndex);
 
         // add menus to the container
@@ -69,6 +77,7 @@ export default class UIScene extends Phaser.Scene {
         // when the action on the menu is selected
         // for now we have only one action so we dont send an action id
         this.events.on('SelectEnemies', this.onSelectEnemies, this);
+        this.events.on('Run', this.onRun, this);
         this.events.on('Enemy', this.onEnemy, this);
         // when the scene receives wake event
         this.sys.events.on('wake', this.createMenu, this);
@@ -86,7 +95,6 @@ export default class UIScene extends Phaser.Scene {
     }
 
 	remapMenu = (menu, units) => {
-        // const names = units.map(({ type }) => type);
         menu.remap(units);
     }
 
@@ -121,5 +129,9 @@ export default class UIScene extends Phaser.Scene {
         this.enemiesMenu.deselect();
         this.currentMenu = null;
         this.battleScene.receivePlayerSelection('attack', index);
+    }
+
+    onRun = () => {
+        this.battleScene.endBattle();
     }
 }

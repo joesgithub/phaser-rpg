@@ -78,6 +78,14 @@ Example `public` structure:
 
 They can then be loaded by Phaser with `this.image.load('my-image', 'images/my-image.png')`.
 
+## Extruded Tilesets
+
+Using [https://github.com/sporadic-labs/tile-extruder](https://github.com/sporadic-labs/tile-extruder) to manually update tile pngs. This solves tile bleed issue.
+
+```
+tile-extruder --tileWidth 8 --tileHeight 16 --input ./public/assets/map/spritesheet.png --output ./public/assets/map/spritesheet-extruded.png
+```
+
 ## Class Properties Support
 
 Modern ES6 class properties are included with the `.babelrc` file at the project root with the `@babel/plugin-proposal-class-properties` plugin.
@@ -99,7 +107,7 @@ If you run into an error about mismatched major versions then go into `package.j
 
 Reinstall one or the other manually to make the versions match 😉
 
-# ESLint
+## ESLint
 
 This template uses a basic `eslint` set up for code linting to help you find and fix common problems in your JavaScript code.
 

@@ -10,7 +10,7 @@ export default class BootScene extends Phaser.Scene {
 
 	preload = () => {
 		// map images
-		this.load.image('tiles', '/assets/map/spritesheet.png');
+		this.load.image('tiles', '/assets/map/spritesheet-extruded.png');
 		// map JSON
 		// made with https://www.mapeditor.org/
 		this.load.tilemapTiledJSON('map', '/assets/map/map.json');

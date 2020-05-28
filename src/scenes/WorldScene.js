@@ -19,7 +19,7 @@ export default class WorldScene extends Phaser.Scene {
         const map = this.make.tilemap({ key: 'map' });
 
         // tileset image
-        const tiles = map.addTilesetImage('spritesheet', 'tiles');
+        const tiles = map.addTilesetImage('spritesheet', 'tiles', 16, 16, 1, 2);
         // add layers (keys taken from tilemap JSON)
         const grass = map.createStaticLayer('Grass', tiles, 0, 0);
         const obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
@@ -66,12 +66,19 @@ export default class WorldScene extends Phaser.Scene {
             repeat: -1
         });
 
+        // battle spawn zones
         this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-        for (var i = 0; i < 30; i++) {
+        for (let i = 0; i < 30; i++) {
             const x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
             const y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-            // x coords, y coords, width, height
-            this.spawns.create(x, y, 20, 20);
+
+            if ((30 <= x && x <= 66) || (80 <= y && y <= 116)) {
+                // if overlap with start, try again
+                i--;
+            } else {
+                // x coords, y coords, width, height
+                this.spawns.create(x, y, 20, 20);
+            }
         }
         // when first two args overlap, call third
         this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
