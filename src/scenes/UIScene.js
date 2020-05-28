@@ -19,10 +19,7 @@ export default class UIScene extends Phaser.Scene {
         this.message;
 	}
 
-	preload() {
-    }
-
-    create() {
+    create = () => {
     	// add graphic group to scene
     	// set graphic styles
     	this.graphics = this.add.graphics();
@@ -50,10 +47,6 @@ export default class UIScene extends Phaser.Scene {
 
         this.battleScene = this.scene.get('battle');
 
-        // can remap all items whenever
-        this.remapMenu(this.heroesMenu, this.battleScene.heroes);
-        this.remapMenu(this.enemiesMenu, this.battleScene.enemies);
-
         this.actionsMenu.confirm = () => this.events.emit('SelectEnemies');
         this.enemiesMenu.confirm = () => this.events.emit('Enemy', this.enemiesMenu.menuItemIndex);
 
@@ -73,27 +66,39 @@ export default class UIScene extends Phaser.Scene {
 
         // events
         this.battleScene.events.on("PlayerSelect", this.onPlayerSelect, this);
+        // when the action on the menu is selected
+        // for now we have only one action so we dont send an action id
         this.events.on('SelectEnemies', this.onSelectEnemies, this);
         this.events.on('Enemy', this.onEnemy, this);
+        // when the scene receives wake event
+        this.sys.events.on('wake', this.createMenu, this);
 
-        // both scenes ready before first turn
-        this.battleScene.nextTurn();
+        this.createMenu();
+    }
+
+    createMenu = () => {
+        // map menus
+        this.remapMenu(this.heroesMenu, this.battleScene.heroes);
+        this.remapMenu(this.enemiesMenu, this.battleScene.enemies);
+
+        // first move
+        this.battleScene.nextTurn(); 
     }
 
 	remapMenu = (menu, units) => {
-        const names = units.map(({ type }) => type);
-        menu.remap(names);
+        // const names = units.map(({ type }) => type);
+        menu.remap(units);
     }
 
     onKeyInput = event => {
-        if (this.currentMenu) {
+        if (this.currentMenu && this.currentMenu.selected) {
             if(event.code === "ArrowUp") {
                 this.currentMenu.moveSelectionUp();
             } else if(event.code === "ArrowDown") {
                 this.currentMenu.moveSelectionDown();
             } else if(event.code === "ArrowRight" || event.code === "Shift") {
  
-            } else if(event.code === "Enter") {
+            } else if(event.code === "Enter" || event.code === "ArrowLeft") {
                 this.currentMenu.confirm();
             } 
         }

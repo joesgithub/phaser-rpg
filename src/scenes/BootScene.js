@@ -8,7 +8,7 @@ export default class BootScene extends Phaser.Scene {
         // this.scene
 	}
 
-	preload() {
+	preload = () => {
 		// map images
 		this.load.image('tiles', '/assets/map/spritesheet.png');
 		// map JSON
@@ -21,8 +21,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('dragonorrange', 'assets/dragonorrange.png');
     }
 
-    create() {
-    	this.scene.start('battle');
-    	// this.scene.start('world');
+    create = () => {
+    	this.scene.start('world');
     }
 }

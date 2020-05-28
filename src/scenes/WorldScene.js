@@ -15,10 +15,7 @@ export default class WorldScene extends Phaser.Scene {
         this.spawns;
 	}
 
-	preload() {
-    }
-
-    create() {
+    create = () => {
         const map = this.make.tilemap({ key: 'map' });
 
         // tileset image
@@ -78,9 +75,12 @@ export default class WorldScene extends Phaser.Scene {
         }
         // when first two args overlap, call third
         this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+
+        // reset keyinputs
+        this.sys.events.on('wake', this.wake, this);
     }
 
-    update() {
+    update = () => {
         // player movement and animation
         this.player.body.setVelocity(0);      
 
@@ -103,7 +103,14 @@ export default class WorldScene extends Phaser.Scene {
         }
     }
 
-    onMeetEnemy(player, zone) {
+    wake = () => {
+        this.cursors.left.reset();
+        this.cursors.right.reset();
+        this.cursors.up.reset();
+        this.cursors.down.reset();
+    }
+
+    onMeetEnemy = (player, zone) => {
         // move the zone
         zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
         zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
@@ -112,5 +119,6 @@ export default class WorldScene extends Phaser.Scene {
         this.cameras.main.shake(300);
 
         // start battle
+        this.scene.switch('battle');
     }
 }
