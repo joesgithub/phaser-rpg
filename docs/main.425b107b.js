@@ -2732,4 +2732,4 @@ var e=arguments[3];require("./polyfills");var r=require("./const"),i=require("./
 },{"phaser":"g7IM","../ui/Menu":"B1nr","../ui/Message":"tsPm"}],"epB2":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e=d(require("phaser")),r=d(require("./scenes/BootScene")),t=d(require("./scenes/WorldScene")),a=d(require("./scenes/BattleScene")),u=d(require("./scenes/UIScene"));function d(e){return e&&e.__esModule?e:{default:e}}var s={type:e.default.AUTO,parent:"game",width:320,height:240,zoom:2,pixelArt:!0,render:{roundPixels:!0},physics:{default:"arcade",arcade:{gravity:{y:0}}},scene:[r.default,t.default,a.default,u.default]},l=new e.default.Game(s);exports.default=l;
 },{"phaser":"g7IM","./scenes/BootScene":"ksYG","./scenes/WorldScene":"Y6nC","./scenes/BattleScene":"c6Nd","./scenes/UIScene":"IPC6"}]},{},["epB2"], null)
-//# sourceMappingURL=/main.425b107b.js.map
+//# sourceMappingURL=main.425b107b.js.map
